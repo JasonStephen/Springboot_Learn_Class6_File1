@@ -16,12 +16,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
-/**
- * @Classname RedisConfig
- * @Description TODO
- * @Date 2019-3-4 15:50
- * @Created by CrazyStone
- */
 @Configuration   // 定义一个配置类
 public class RedisConfig {
     @Bean
