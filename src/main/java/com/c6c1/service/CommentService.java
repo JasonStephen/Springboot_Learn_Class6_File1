@@ -16,27 +16,28 @@ import java.util.Optional;
 @Service
 public class CommentService {
     @Autowired
-    private CommentService commentRepository;
+    private CommentRepository commentRepository;
 
-    //@Cacheable(cacheNames = "comment")
+    // 根据评论id查询评论信息
+//    @Cacheable(cacheNames = "comment")
     @Cacheable(cacheNames = "comment",unless = "#result==null")
     public Comment findById(int comment_id){
-        Optional<Comment> optional = Optional.ofNullable(commentRepository.findById(comment_id));
+        Optional<Comment> optional = commentRepository.findById(comment_id);
         if(optional.isPresent()){
             return optional.get();
         }
         return null;
     }
 
+    // 更新评论信息
     @CachePut(cacheNames = "comment",key = "#result.id")
     public Comment updateComment(Comment comment){
         commentRepository.updateComment(comment.getAuthor(), comment.getaId());
         return comment;
     }
-
-    /*@CacheEvict(cacheNames = "comment")
-    public void deleteComment(int comment_id)
-    {
+    // 删除评论信息
+    @CacheEvict(cacheNames = "comment")
+    public void deleteComment(int comment_id){
         commentRepository.deleteById(comment_id);
-    }*/
+    }
 }
