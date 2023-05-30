@@ -2,6 +2,7 @@ package com.c6c1.domain;
 
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "t_comment")
 public class Comment {
