@@ -57,6 +57,7 @@ public class RedisConfig {
         RedisCacheManager cacheManager = RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(config).build();
         return cacheManager;
     }
-
 }
+
+
 
