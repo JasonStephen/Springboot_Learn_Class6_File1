@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
+
 @Service
 public class CommentService {
     @Autowired
@@ -19,7 +21,7 @@ public class CommentService {
     //@Cacheable(cacheNames = "comment")
     @Cacheable(cacheNames = "comment",unless = "#result==null")
     public Comment findById(int comment_id){
-        Optional<Comment> optional = commentRepository.findById(comment_id);
+        Optional<Comment> optional = Optional.ofNullable(commentRepository.findById(comment_id));
         if(optional.isPresent()){
             return optional.get();
         }
@@ -31,9 +33,10 @@ public class CommentService {
         commentRepository.updateComment(comment.getAuthor(), comment.getaId());
         return comment;
     }
-    @CacheEvict(cacheNames = "comment")
+
+    /*@CacheEvict(cacheNames = "comment")
     public void deleteComment(int comment_id)
     {
         commentRepository.deleteById(comment_id);
-    }
+    }*/
 }
